@@ -20,22 +20,26 @@ function showListLoading() {
 function setButtonLoading(button, isLoading, originalText, loadingText) {
   if (isLoading) {
     button.disabled = true;
-    button.setAttribute('data-original-text', originalText || button.textContent);
-    button.textContent = loadingText || 'Loading...';
-    button.classList.add('loading');
+    button.setAttribute(
+      "data-original-text",
+      originalText || button.textContent
+    );
+    button.textContent = loadingText || "Loading...";
+    button.classList.add("loading");
   } else {
     button.disabled = false;
-    button.textContent = button.getAttribute('data-original-text') || originalText;
-    button.classList.remove('loading');
-    button.removeAttribute('data-original-text');
+    button.textContent =
+      button.getAttribute("data-original-text") || originalText;
+    button.classList.remove("loading");
+    button.removeAttribute("data-original-text");
   }
 }
 
 const onAddTask = async () => {
   try {
     // Hiển thị loading cho add button
-    setButtonLoading(addTaskBtn, true, 'Add Task', 'Adding...');
-    
+    setButtonLoading(addTaskBtn, true, "Add Task", "Adding...");
+
     const tasks = await getTodos();
     const isDuplicated = tasks.some(
       (todo) =>
@@ -46,13 +50,12 @@ const onAddTask = async () => {
       return;
     }
     await postTodo();
-    
+
     // Clear input after successful add
-    input.value = '';
-    
+    input.value = "";
+
     // Re-render danh sách
     await onMount();
-    
   } catch (error) {
     console.log(error);
     alert("Error adding task. Please try again.");
@@ -134,7 +137,7 @@ const onEditTask = async (id, element) => {
 
     try {
       // Hiển thị loading cho save button
-      setButtonLoading(saveBtn, true, 'Save', 'Saving...');
+      setButtonLoading(saveBtn, true, "Save", "Saving...");
       cancelBtn.disabled = true;
 
       const tasks = await getTodos();
@@ -195,13 +198,12 @@ const onToggleDoneTask = async (id, element) => {
   try {
     // Hiển thị loading cho done button
     const originalText = element.textContent;
-    setButtonLoading(element, true, originalText, 'Updating...');
-    
+    setButtonLoading(element, true, originalText, "Updating...");
+
     await putCompleteTodo(id);
-    
+
     // Re-render danh sách
     await onMount();
-    
   } catch (error) {
     console.log(error);
     alert("Error updating task. Please try again.");
@@ -214,14 +216,13 @@ const onDeleteTask = async (id, element) => {
   if (confirm("Are you sure to delete this task?")) {
     try {
       // Hiển thị loading cho delete button
-      setButtonLoading(element, true, 'Delete', 'Deleting...');
-      
+      setButtonLoading(element, true, "Delete", "Deleting...");
+
       // Người dùng bấm OK
       await deleteTodo(id);
-      
+
       // Re-render danh sách
       await onMount();
-      
     } catch (error) {
       console.log(error);
       alert("Error deleting task. Please try again.");
@@ -355,13 +356,14 @@ const onMount = async () => {
   try {
     // Hiển thị loading khi tải danh sách
     showListLoading();
-    
+
     const tasks = await getTodos();
     console.log(tasks);
     renderTasks(tasks);
   } catch (error) {
     console.log(error);
-    taskList.innerHTML = '<li class="error-message">Error loading tasks. Please refresh the page.</li>';
+    taskList.innerHTML =
+      '<li class="error-message">Error loading tasks. Please refresh the page.</li>';
   }
 };
 
