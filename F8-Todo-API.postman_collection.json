@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "3f1a01d8-e29e-4059-aece-f5023232068b",
+		"name": "F8 Todo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45702308"
+	},
+	"item": [
+		{
+			"name": "Todos",
+			"item": [
+				{
+					"name": "Get todos list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_API}}/todos",
+							"host": [
+								"{{BASE_API}}"
+							],
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
